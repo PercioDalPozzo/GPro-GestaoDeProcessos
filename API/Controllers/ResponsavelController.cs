@@ -1,7 +1,6 @@
 ﻿using Aplicacao.Aplicacao.Responsavel;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 
 namespace API.Controllers
 {
@@ -15,15 +14,22 @@ namespace API.Controllers
             _aplicResponsavel = aplicResponsavel;
         }
 
-        public List<RetornoPesquisarView> Pesquisar(FiltroPesquisarView view)
+        [HttpGet]
+        public RetornoViewModel Foi()
+        {
+            return RetornoViewModel.RetornoSucesso("Foi..." + DateTime.Now.ToLongTimeString());
+        }
+
+        public RetornoViewModel Pesquisar(FiltroPesquisarView view)
         {
             try
             {
-                return _aplicResponsavel.Pesquisar(view);
+                var retorno = _aplicResponsavel.Pesquisar(view);
+                return RetornoViewModel.RetornoSucesso(retorno);
             }
             catch (Exception e)
             {
-                throw new Exception();
+                return RetornoViewModel.RetornoErro(e.Message);
             }
         }
     }

@@ -12,7 +12,7 @@ namespace Aplicacao.Dominio.Responsavel
 
         public int Id { get; set; }
         public string NumeroProcesso { get; set; }
-        public DateTime DataDistribuicao { get; set; }
+        public DateTime? DataDistribuicao { get; set; }
 
         public List<ProcessoResponsavel> ProcessoResponsavel { get; set; }
     }

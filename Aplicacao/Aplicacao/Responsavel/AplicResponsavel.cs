@@ -20,15 +20,15 @@ namespace Aplicacao.Aplicacao.Responsavel
             var query = _repResponsavel.Recuperar();
 
             if (!string.IsNullOrEmpty(filtro.Nome))
-                query = query.Where(p => filtro.Nome.Contains(p.Nome));
+                query = query.Where(p => p.Nome.ToLower().Contains(filtro.Nome.ToLower()));
 
             if (!string.IsNullOrEmpty(filtro.Cpf))
-                query = query.Where(p => filtro.Cpf.Contains(p.Cpf));
+                query = query.Where(p => p.Cpf.ToLower().Contains(filtro.Cpf.ToLower()));
 
             if (!string.IsNullOrEmpty(filtro.NumeroProcesso))
             {
                 var codigosResponsaveis = _repProcessoResponsavel.Recuperar()
-                                                                 .Where(p => p.Processo.NumeroProcesso == filtro.NumeroProcesso)
+                                                                 .Where(p => p.Processo.NumeroProcesso.ToLower() == filtro.NumeroProcesso.ToLower())
                                                                  .Select(p => p.CodigoResponsavel)
                                                                  .ToList();
                 query = query.Where(p => codigosResponsaveis.Contains(p.Id));
@@ -36,7 +36,7 @@ namespace Aplicacao.Aplicacao.Responsavel
 
             var retorno = query
                 .Take(filtro.Limite)
-                .Skip(filtro.Pagina)
+                .Skip(filtro.Pagina - 1)
                 .Select(p => new RetornoPesquisarView
                 {
                     Id = p.Id,
@@ -64,7 +64,7 @@ namespace Aplicacao.Aplicacao.Responsavel
                 var processos = todosProcessos.Where(p => p.CodigoResponsavel == ret.Id).OrderBy(p => p.DataDistribuicao).Select(p => p.NumeroProcesso).ToList();
                 if (processos.Any())
                 {
-                    var concat = string.Join("/", processos);
+                    var concat = string.Join(" - ", processos);
                     ret.Processos = concat;
                 }
             }

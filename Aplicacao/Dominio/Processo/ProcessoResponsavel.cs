@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Aplicacao.Dominio.Responsavel
+﻿namespace Aplicacao.Dominio.Responsavel
 {
     public class ProcessoResponsavel
     {
+        protected ProcessoResponsavel()
+        {
+            // necessário para o EntityCore
+        }
+
         public ProcessoResponsavel(Processo processo)
         {
             Processo = processo;
@@ -17,6 +18,5 @@ namespace Aplicacao.Dominio.Responsavel
         public int CodigoResponsavel { get; set; }
 
         public virtual Processo Processo { get; set; }
-
     }
 }

@@ -2,9 +2,11 @@ using Aplicacao.Aplicacao.Responsavel;
 using Aplicacao.Dominio.Responsavel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Repositorio.Contexto;
 using Repositorio.Repositorios;
 
 namespace API
@@ -21,15 +23,19 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IRepProcessoResponsavel, RepProcessoResponsavel>();
+            services.AddEntityFrameworkNpgsql().AddDbContext<ContextoBanco>(options => options.UseNpgsql(Configuration.GetConnectionString("ConexaoBanco")));
+
             services.AddScoped<IAplicResponsavel, AplicResponsavel>();
+            services.AddScoped<IRepProcessoResponsavel, RepProcessoResponsavel>();
+            services.AddScoped<IRepProcesso, RepProcesso>();
             services.AddScoped<IRepResponsavel, RepResponsavel>();
 
-           /* services.AddControllers()
+
+            services.AddControllers()
                .AddJsonOptions(options =>
                {
                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
-               });*/
+               });
 
             services.AddSingleton(Configuration);
             services.AddHttpClient();
@@ -66,7 +72,7 @@ namespace API
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cálculo juros");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Responsavel");
             });
         }
     }
