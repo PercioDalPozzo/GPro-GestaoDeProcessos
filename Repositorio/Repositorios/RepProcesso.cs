@@ -1,32 +1,14 @@
-﻿using Aplicacao.Dominio.Responsavel;
+﻿using Aplicacao.Dominio;
 using Repositorio.Contexto;
-using System;
-using System.Linq;
 
 namespace Repositorio.Repositorios
 {
-    public class RepProcesso : IRepProcesso
+    public class RepProcesso : RepBase<Processo>, IRepProcesso
     {
-        private readonly ContextoBanco _contexto;
-
         public RepProcesso(ContextoBanco contexto)
+            : base(contexto)
         {
-            _contexto = contexto;
-        }
 
-        public Processo Find(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Processo> Recuperar()
-        {
-            return _contexto.Set<Processo>();
-        }
-
-        public void Salvar(Processo processo)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Aplicacao.Dominio.Responsavel;
+﻿using Aplicacao.Dominio;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,9 +16,13 @@ namespace Repositorio.Mapeamento
             builder.Property(p => p.CodigoResponsavel).IsRequired().HasColumnName("idresponsavel");
 
             builder.HasOne(p => p.Processo)
-                .WithMany()
+                .WithMany(p=>p.ProcessoResponsavel)
                 .HasForeignKey(p => p.CodigoProcesso);
 
+            
+            builder.HasOne(p => p.Responsavel)
+                .WithMany()
+                .HasForeignKey(p => p.CodigoResponsavel);
         }
     }
 }

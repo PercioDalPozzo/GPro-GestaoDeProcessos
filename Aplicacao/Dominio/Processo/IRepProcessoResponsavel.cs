@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 
-namespace Aplicacao.Dominio.Responsavel
+namespace Aplicacao.Dominio
 {
     public interface IRepProcessoResponsavel
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Aplicacao.Dominio.Responsavel
+namespace Aplicacao.Dominio
 {
     public interface IRepResponsavel
     {
@@ -12,5 +12,7 @@ namespace Aplicacao.Dominio.Responsavel
         IQueryable<Responsavel> Recuperar();
 
         void Salvar(Responsavel responsavel);
+
+        void SaveChanges();
     }
 }

@@ -1,32 +1,13 @@
-﻿using Aplicacao.Dominio.Responsavel;
+﻿using Aplicacao.Dominio;
 using Repositorio.Contexto;
-using System;
-using System.Linq;
 
 namespace Repositorio.Repositorios
 {
-    public class RepResponsavel : IRepResponsavel
+    public class RepResponsavel : RepBase<Responsavel>, IRepResponsavel
     {
-        private readonly ContextoBanco _contexto;
-
         public RepResponsavel(ContextoBanco contexto)
+            : base(contexto)
         {
-            _contexto = contexto;
-        }
-
-        public Responsavel Find(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Responsavel> Recuperar()
-        {
-            return _contexto.Set<Responsavel>();
-        }
-
-        public void Salvar(Responsavel responsavel)
-        {
-            throw new NotImplementedException();
         }
     }
 }

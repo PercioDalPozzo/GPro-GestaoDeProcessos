@@ -1,5 +1,5 @@
-using Aplicacao.Aplicacao.Responsavel;
-using Aplicacao.Dominio.Responsavel;
+using Aplicacao.Aplicacao;
+using Aplicacao.Dominio;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

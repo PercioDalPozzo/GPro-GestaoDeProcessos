@@ -1,13 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Aplicacao.Infra;
 
-namespace Aplicacao.Dominio.Responsavel
+namespace Aplicacao.Dominio
 {
-    public class Responsavel
-    {     
-        public int Id { get; set; }
+    public class Responsavel : Entidade
+    {
         public string Nome { get; set; }
-        public string Cpf { get; set; }
-        public string Email { get; set; }
+        public Cpf Cpf { get; set; }
+        public Email Email { get; set; }
         public byte[] Foto { get; set; }
     }
 }

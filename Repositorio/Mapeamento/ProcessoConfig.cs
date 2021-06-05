@@ -1,4 +1,4 @@
-﻿using Aplicacao.Dominio.Responsavel;
+﻿using Aplicacao.Dominio;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,9 +12,19 @@ namespace Repositorio.Mapeamento
             builder.HasKey(p => p.Id);
 
             builder.Property(p => p.Id).IsRequired().HasColumnName("id");
-            builder.Property(p => p.NumeroProcesso).IsRequired().HasColumnName("numeroprocesso");
             builder.Property(p => p.DataDistribuicao).HasColumnName("datadistribuicao");
+            builder.Property(p => p.ProcessoSegredo).IsRequired().HasColumnName("processosegredo");
+            builder.Property(p => p.PastaFisica).HasColumnName("pastafisica");
+            builder.Property(p => p.Descricao).HasColumnName("descricao");
+            builder.Property(p => p.Situacao).IsRequired().HasColumnName("situacao");
+            builder.Property(p => p.CodigoProcessoPai).HasColumnName("idprocessopai");
 
+
+            builder.OwnsOne(p => p.NumeroProcesso).Property(p => p.Value).IsRequired().HasColumnName("numeroprocesso");
+
+            builder.HasOne(p => p.ProcessoPai)
+                .WithMany()
+                .HasForeignKey(p => p.CodigoProcessoPai);
 
             builder.HasMany(p => p.ProcessoResponsavel)
                 .WithOne()

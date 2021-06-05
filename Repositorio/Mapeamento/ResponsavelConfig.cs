@@ -1,4 +1,4 @@
-﻿using Aplicacao.Dominio.Responsavel;
+﻿using Aplicacao.Dominio;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,8 +13,11 @@ namespace Repositorio.Mapeamento
 
             builder.Property(p => p.Id).IsRequired().HasColumnName("id");
             builder.Property(p => p.Nome).IsRequired().HasColumnName("nome");
-            builder.Property(p => p.Cpf).IsRequired().HasColumnName("cpf");
-            builder.Property(p => p.Email).IsRequired().HasColumnName("email");
+            builder.Property(p => p.Foto).HasColumnName("foto");
+
+
+            builder.OwnsOne(p => p.Cpf).Property(p => p.Value).IsRequired().HasColumnName("cpf");
+            builder.OwnsOne(p => p.Email).Property(p => p.Value).IsRequired().HasColumnName("email");
         }
     }
 }

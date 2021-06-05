@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Aplicacao.Infra;
 
-namespace Aplicacao.Aplicacao.Responsavel
+namespace Aplicacao.Aplicacao
 {
     public interface IAplicResponsavel
     {
-        List<RetornoPesquisarView> Pesquisar(FiltroPesquisarView filtro);
+        RetornoPesquisaView Pesquisar(FiltroPesquisarView filtro);
+        RetornoPrepararEdicaoView PrepararEdicao(IdView view);
+        RetornoSalvarView Salvar(SalvarResponsavelView view);
     }
 }
