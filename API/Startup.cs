@@ -29,6 +29,7 @@ namespace API
             services.AddScoped<IRepProcessoResponsavel, RepProcessoResponsavel>();
             services.AddScoped<IRepProcesso, RepProcesso>();
             services.AddScoped<IRepResponsavel, RepResponsavel>();
+            services.AddScoped<IValidadorResponsavel, ValidadorResponsavel>();
 
 
             services.AddControllers()

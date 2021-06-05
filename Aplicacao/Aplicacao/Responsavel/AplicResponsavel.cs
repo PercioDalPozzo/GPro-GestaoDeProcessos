@@ -10,11 +10,13 @@ namespace Aplicacao.Aplicacao
     {
         private readonly IRepResponsavel _repResponsavel;
         private readonly IRepProcessoResponsavel _repProcessoResponsavel;
+        private readonly IValidadorResponsavel _validadorResponsavel;
 
-        public AplicResponsavel(IRepResponsavel repResponsavel, IRepProcessoResponsavel repProcessoResponsavel)
+        public AplicResponsavel(IRepResponsavel repResponsavel, IRepProcessoResponsavel repProcessoResponsavel, IValidadorResponsavel validadorResponsavel)
         {
             _repResponsavel = repResponsavel;
             _repProcessoResponsavel = repProcessoResponsavel;
+              _validadorResponsavel = validadorResponsavel;
         }
 
         public RetornoPrepararEdicaoView PrepararEdicao(IdView view)
@@ -134,6 +136,8 @@ namespace Aplicacao.Aplicacao
             if (view.AtualizarFoto)
                 resp.Foto = view.Foto;
 
+            _validadorResponsavel.ValidarCadastro(resp);
+
             _repResponsavel.Salvar(resp);
             _repResponsavel.SaveChanges();
 
@@ -147,6 +151,16 @@ namespace Aplicacao.Aplicacao
 
             return _repResponsavel.Find(view.Id);
 
+        }
+
+        public void Remover(IdView view)
+        {
+            var resp = _repResponsavel.Find(view.Id);
+
+            _validadorResponsavel.ExcecaoSeTiverVinculo(resp);
+
+            _repResponsavel.Remover(resp);
+            _repResponsavel.SaveChanges();
         }
     }
 }

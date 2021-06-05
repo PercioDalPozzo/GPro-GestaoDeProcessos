@@ -15,6 +15,16 @@
             };
         }
 
+        internal static RetornoViewModel RetornoSucesso()
+        {
+            var ret = new RetornoViewModel
+            {
+                Sucesso = true
+            };
+
+            return ret;
+        }
+
         internal static RetornoViewModel RetornoSucesso(object content)
         {
             var ret = new RetornoViewModel

@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 
 namespace Aplicacao.Dominio
 {
     public interface IRepResponsavel
     {
+        IQueryable<Responsavel> Recuperar();
+
         Responsavel Find(int id);
 
-        IQueryable<Responsavel> Recuperar();
+        void Remover(Responsavel resp);
 
         void Salvar(Responsavel responsavel);
 

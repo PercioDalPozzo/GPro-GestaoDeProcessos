@@ -60,6 +60,19 @@ namespace API.Controllers
             }
         }
 
+        public RetornoViewModel Remover(IdView view)
+        {
+            try
+            {
+                _aplicResponsavel.Remover(view);
+                return RetornoViewModel.RetornoSucesso();
+            }
+            catch (Exception e)
+            {
+                return RetornoViewModel.RetornoErro(e.Message);
+            }
+        }
+
 
     }
 }

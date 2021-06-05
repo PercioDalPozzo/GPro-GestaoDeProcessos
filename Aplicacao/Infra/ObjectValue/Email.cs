@@ -16,12 +16,18 @@ namespace Aplicacao.Infra
         public Email(string email)
         {
             Value = email;
+        }
+
+        internal void Validar()
+        {
+            if (Value.Length > 400)
+                throw new Exception("E-mail deve possuir no máximo 400 caracteres.");
 
             if (!EhValido())
                 throw new Exception(string.Format("E-mail inválido {0}.", Value));
         }
 
-        public bool EhValido()
+        bool EhValido()
         {
             try
             {

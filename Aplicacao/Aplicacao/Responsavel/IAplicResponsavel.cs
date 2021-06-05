@@ -7,5 +7,6 @@ namespace Aplicacao.Aplicacao
         RetornoPesquisaView Pesquisar(FiltroPesquisarView filtro);
         RetornoPrepararEdicaoView PrepararEdicao(IdView view);
         RetornoSalvarView Salvar(SalvarResponsavelView view);
+        void Remover(IdView view);
     }
 }

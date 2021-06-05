@@ -1,6 +1,5 @@
 ﻿using Aplicacao.Infra;
 using Repositorio.Contexto;
-using System;
 using System.Linq;
 
 namespace Repositorio.Repositorios
@@ -22,6 +21,11 @@ namespace Repositorio.Repositorios
         public IQueryable<T> Recuperar()
         {
             return _contexto.Set<T>();
+        }
+
+        public void Remover(T entidade)
+        {
+            _contexto.Set<T>().Remove(entidade);
         }
 
         public void Salvar(T entidade)
