@@ -1,7 +1,7 @@
 ﻿using Aplicacao.Infra;
 using System;
 
-namespace Aplicacao.Dominio
+namespace Aplicacao.Dominio.CadastroResponsavel
 {
     public class Responsavel : Entidade
     {

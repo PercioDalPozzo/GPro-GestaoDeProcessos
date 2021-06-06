@@ -1,6 +1,6 @@
 ﻿using Aplicacao.Infra;
 
-namespace Aplicacao.Aplicacao
+namespace Aplicacao.Aplicacao.CadastroResponsavel
 {
     public interface IAplicResponsavel
     {

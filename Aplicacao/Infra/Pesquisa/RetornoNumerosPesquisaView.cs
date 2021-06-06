@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Aplicacao.Infra.Pesquisa
+﻿namespace Aplicacao.Infra
 {
     public class RetornoNumerosPesquisaView
     {

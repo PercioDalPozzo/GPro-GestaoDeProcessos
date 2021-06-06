@@ -1,5 +1,8 @@
 using Aplicacao.Aplicacao;
+using Aplicacao.Aplicacao.CadastroResponsavel;
 using Aplicacao.Dominio;
+using Aplicacao.Dominio.CadastroProcesso;
+using Aplicacao.Dominio.CadastroResponsavel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

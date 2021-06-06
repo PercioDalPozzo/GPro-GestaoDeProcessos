@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Aplicacao.Dominio
+namespace Aplicacao.Dominio.CadastroResponsavel
 {
     public interface IRepResponsavel
     {

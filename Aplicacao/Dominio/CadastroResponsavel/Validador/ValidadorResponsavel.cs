@@ -1,8 +1,9 @@
-﻿using Aplicacao.Infra.ObjectValue;
+﻿using Aplicacao.Dominio.CadastroProcesso;
+using Aplicacao.Infra;
 using System;
 using System.Linq;
 
-namespace Aplicacao.Dominio
+namespace Aplicacao.Dominio.CadastroResponsavel
 {
     public class ValidadorResponsavel : IValidadorResponsavel
     {

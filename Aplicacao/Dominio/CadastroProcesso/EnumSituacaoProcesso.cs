@@ -1,4 +1,4 @@
-﻿namespace Aplicacao.Dominio
+﻿namespace Aplicacao.Dominio.CadastroProcesso
 {
     public enum EnumSituacaoProcesso
     {

@@ -1,6 +1,7 @@
-﻿using Aplicacao.Infra;
+﻿using Aplicacao.Dominio.CadastroResponsavel;
+using Aplicacao.Infra;
 
-namespace Aplicacao.Dominio
+namespace Aplicacao.Dominio.CadastroProcesso
 {
     public class ProcessoResponsavel : Entidade
     {

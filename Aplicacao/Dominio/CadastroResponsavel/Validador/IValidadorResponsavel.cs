@@ -1,4 +1,4 @@
-﻿namespace Aplicacao.Dominio
+﻿namespace Aplicacao.Dominio.CadastroResponsavel
 {
     public interface IValidadorResponsavel
     {

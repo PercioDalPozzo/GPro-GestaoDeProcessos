@@ -1,8 +1,9 @@
 ﻿using Aplicacao.Dominio;
+using Aplicacao.Dominio.CadastroProcesso;
 using System;
 using System.Collections.Generic;
 
-namespace Aplicacao.Aplicacao
+namespace Aplicacao.Aplicacao.CadastroResponsavel
 {
     public class RetornoPrepararEdicaoView
     {

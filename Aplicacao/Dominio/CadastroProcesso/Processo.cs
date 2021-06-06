@@ -1,9 +1,8 @@
 ﻿using Aplicacao.Infra;
-using Aplicacao.Infra.ObjectValue;
 using System;
 using System.Collections.Generic;
 
-namespace Aplicacao.Dominio
+namespace Aplicacao.Dominio.CadastroProcesso
 {
     public class Processo : Entidade
     {

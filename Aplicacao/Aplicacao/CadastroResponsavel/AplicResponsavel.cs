@@ -1,10 +1,11 @@
 ﻿using Aplicacao.Dominio;
+using Aplicacao.Dominio.CadastroProcesso;
+using Aplicacao.Dominio.CadastroResponsavel;
 using Aplicacao.Infra;
-using Aplicacao.Infra.ObjectValue;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aplicacao.Aplicacao
+namespace Aplicacao.Aplicacao.CadastroResponsavel
 {
     public class AplicResponsavel : IAplicResponsavel
     {
@@ -33,7 +34,7 @@ namespace Aplicacao.Aplicacao
             var todosProcessos = _repProcessoResponsavel.Recuperar()
                                                         .Where(p => p.CodigoResponsavel == view.Id)
                                                         .OrderByDescending(p => p.Id)
-                                                        .Take(100)
+                                                        .Take(10)
                                                         .Select(p => new
                                                         {
                                                             NumeroProcesso = p.Processo.NumeroProcesso.Value,

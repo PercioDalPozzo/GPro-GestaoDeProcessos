@@ -1,4 +1,5 @@
 ﻿using Aplicacao.Dominio;
+using Aplicacao.Dominio.CadastroProcesso;
 using Repositorio.Contexto;
 
 namespace Repositorio.Repositorios

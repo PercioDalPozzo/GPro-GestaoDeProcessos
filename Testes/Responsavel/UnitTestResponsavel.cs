@@ -1,7 +1,9 @@
 using Aplicacao.Aplicacao;
+using Aplicacao.Aplicacao.CadastroResponsavel;
 using Aplicacao.Dominio;
+using Aplicacao.Dominio.CadastroProcesso;
+using Aplicacao.Dominio.CadastroResponsavel;
 using Aplicacao.Infra;
-using Aplicacao.Infra.ObjectValue;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -211,7 +213,7 @@ namespace Testes
             processo1.NumeroProcesso = new NumeroProcesso("0123456789");
             var processo2 = new Processo();
             processo2.NumeroProcesso = new NumeroProcesso("0123456789");
-                     
+
             var registrosFake = new List<ProcessoResponsavel>()
             {
                 new ProcessoResponsavel(processo1, responsavel),

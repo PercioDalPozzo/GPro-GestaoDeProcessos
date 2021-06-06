@@ -1,4 +1,5 @@
 ﻿using Aplicacao.Dominio;
+using Aplicacao.Dominio.CadastroProcesso;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

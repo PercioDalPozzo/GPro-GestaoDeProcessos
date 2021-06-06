@@ -1,4 +1,4 @@
-﻿namespace Aplicacao.Aplicacao
+﻿namespace Aplicacao.Aplicacao.CadastroResponsavel
 {
     public class RetornoPesquisarView
     {

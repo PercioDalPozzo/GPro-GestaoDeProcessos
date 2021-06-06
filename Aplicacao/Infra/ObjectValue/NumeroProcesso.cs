@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Aplicacao.Infra.ObjectValue
+namespace Aplicacao.Infra
 {
     public class NumeroProcesso
     {

@@ -1,4 +1,4 @@
-﻿using Aplicacao.Aplicacao;
+﻿using Aplicacao.Aplicacao.CadastroResponsavel;
 using Aplicacao.Infra;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,9 +16,9 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public RetornoViewModel Foi()
+        public RetornoViewModel Ping()
         {
-            return RetornoViewModel.RetornoSucesso("Foi..." + DateTime.Now.ToLongTimeString());
+            return RetornoViewModel.RetornoSucesso("Ping..." + DateTime.Now.ToLongTimeString());
         }
 
         public RetornoViewModel PrepararEdicao(IdView view)
