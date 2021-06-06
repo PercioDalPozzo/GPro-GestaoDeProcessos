@@ -16,7 +16,7 @@ namespace Aplicacao.Aplicacao
         {
             _repResponsavel = repResponsavel;
             _repProcessoResponsavel = repProcessoResponsavel;
-              _validadorResponsavel = validadorResponsavel;
+            _validadorResponsavel = validadorResponsavel;
         }
 
         public RetornoPrepararEdicaoView PrepararEdicao(IdView view)
@@ -32,6 +32,8 @@ namespace Aplicacao.Aplicacao
 
             var todosProcessos = _repProcessoResponsavel.Recuperar()
                                                         .Where(p => p.CodigoResponsavel == view.Id)
+                                                        .OrderByDescending(p => p.Id)
+                                                        .Take(100)
                                                         .Select(p => new
                                                         {
                                                             NumeroProcesso = p.Processo.NumeroProcesso.Value,
@@ -75,9 +77,12 @@ namespace Aplicacao.Aplicacao
 
             CarregarProcessosParaListagem(registros);
 
+            var numerosDaConsulta = paginador.NumerosDaConsulta();
+
             return new RetornoPesquisaView
             {
-                TotalRegistros = paginador.QuantRegistros(),
+                TotalPaginas = numerosDaConsulta.TotalPaginas,
+                TotalRegistros = numerosDaConsulta.TotalRegistros,
                 Registros = registros
             };
         }
@@ -115,9 +120,30 @@ namespace Aplicacao.Aplicacao
                                                    .Where(p => codigosResponsaveis.Contains(p.CodigoResponsavel))
                                                    .Select(p => new { p.CodigoProcesso, NumeroProcesso = p.Processo.NumeroProcesso.Value, p.Processo.DataDistribuicao, p.CodigoResponsavel })
                                                    .ToList();
+
+            //var dezUltimosProcessosDeCadaResponsavel = _repProcessoResponsavel.Recuperar()
+            //                                                                  .Where(p => codigosResponsaveis.Contains(p.CodigoResponsavel))
+            //                                                                  .Select(p => new { NumeroProcesso = p.Processo.NumeroProcesso.Value, p.Processo.DataDistribuicao, p.CodigoResponsavel })
+            //                                                                  .GroupBy(p => p.CodigoResponsavel)
+            //                                                                  .Select(p => new
+            //                                                                  {
+            //                                                                      CodigoResponsavel = p.Key,
+            //                                                                      Processos = p.OrderByDescending(p => p.DataDistribuicao)
+            //                                                                                   //.Take(10)
+            //                                                                                   .Select(i => new
+            //                                                                                   {
+            //                                                                                       i.NumeroProcesso
+            //                                                                                   })
+            //                                                                  })
+            //                                                                  .ToList();
+
             foreach (var ret in retorno)
             {
-                var processos = todosProcessos.Where(p => p.CodigoResponsavel == ret.Id).OrderBy(p => p.DataDistribuicao).Select(p => NumeroProcesso.Formatar(p.NumeroProcesso)).ToList();
+                var processos = todosProcessos.Where(p => p.CodigoResponsavel == ret.Id)
+                                              .OrderByDescending(p => p.DataDistribuicao)
+                                              .Take(4)
+                                              .Select(p => NumeroProcesso.Formatar(p.NumeroProcesso))
+                                              .ToList();
                 if (processos.Any())
                 {
                     var concat = string.Join(" - ", processos);
