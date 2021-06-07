@@ -12,6 +12,8 @@ namespace Aplicacao.Dominio.CadastroProcesso
 
         public ProcessoResponsavel(Processo processo, Responsavel responsavel)
         {
+            processo.ProcessoResponsavel.Add(this);
+
             Processo = processo;
             CodigoProcesso = processo.Id;
 

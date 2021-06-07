@@ -1,6 +1,5 @@
-using Aplicacao.Aplicacao;
+using Aplicacao.Aplicacao.CadastroProcesso;
 using Aplicacao.Aplicacao.CadastroResponsavel;
-using Aplicacao.Dominio;
 using Aplicacao.Dominio.CadastroProcesso;
 using Aplicacao.Dominio.CadastroResponsavel;
 using Microsoft.AspNetCore.Builder;
@@ -28,10 +27,12 @@ namespace API
         {
             services.AddEntityFrameworkNpgsql().AddDbContext<ContextoBanco>(options => options.UseNpgsql(Configuration.GetConnectionString("ConexaoBanco")));
 
+            services.AddScoped<IAplicProcesso, AplicProcesso>();
             services.AddScoped<IAplicResponsavel, AplicResponsavel>();
             services.AddScoped<IRepProcessoResponsavel, RepProcessoResponsavel>();
             services.AddScoped<IRepProcesso, RepProcesso>();
             services.AddScoped<IRepResponsavel, RepResponsavel>();
+            services.AddScoped<IValidadorProcesso, ValidadorProcesso>();
             services.AddScoped<IValidadorResponsavel, ValidadorResponsavel>();
 
 

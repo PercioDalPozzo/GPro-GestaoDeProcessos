@@ -1,5 +1,5 @@
-﻿using Aplicacao.Dominio;
-using Aplicacao.Dominio.CadastroProcesso;
+﻿using Aplicacao.Dominio.CadastroProcesso;
+using Aplicacao.Dominio.CadastroResponsavel;
 using System;
 using System.Collections.Generic;
 
@@ -7,8 +7,14 @@ namespace Aplicacao.Aplicacao.CadastroResponsavel
 {
     public class RetornoPrepararEdicaoView
     {
-        public RetornoPrepararEdicaoView()
+        public RetornoPrepararEdicaoView(Responsavel responsavel)
         {
+            Id = responsavel.Id;
+            Nome = responsavel.Nome;
+            Cpf = responsavel.Cpf.Value;
+            Email = responsavel.Email.Value;
+            Foto = responsavel.Foto;
+
             Processos = new List<ProcessoView>();
         }
 

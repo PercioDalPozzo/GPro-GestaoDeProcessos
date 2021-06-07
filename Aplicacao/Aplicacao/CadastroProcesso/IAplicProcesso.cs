@@ -1,12 +1,12 @@
 ﻿using Aplicacao.Infra;
 
-namespace Aplicacao.Aplicacao.CadastroResponsavel
+namespace Aplicacao.Aplicacao.CadastroProcesso
 {
-    public interface IAplicResponsavel
+    public interface IAplicProcesso
     {
         RetornoPrepararEdicaoView PrepararEdicao(IdView view);
         RetornoPesquisaView Pesquisar(FiltroPesquisarView filtro);
-        RetornoSalvarView Salvar(SalvarResponsavelView view);
+        RetornoSalvarView Salvar(SalvarProcessoView view);
         void Remover(IdView view);
     }
 }

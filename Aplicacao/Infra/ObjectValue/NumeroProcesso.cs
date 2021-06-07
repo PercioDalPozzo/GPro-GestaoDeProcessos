@@ -24,6 +24,11 @@ namespace Aplicacao.Infra
             return regex.Replace(numero, "");
         }
 
+        public string Formatar()
+        {
+            return Formatar(Value);
+        }
+
         public static string Formatar(string numero)
         {
             //NNNNNNN-DD.AAAA.JTR.OOOO
@@ -37,7 +42,7 @@ namespace Aplicacao.Infra
         public void Validar()
         {
             if (!EhValido())
-                throw new Exception(string.Format("Número processo unificado {0}.", Value));
+                throw new Exception(string.Format("Número processo unificado inválido {0}.", Value));
         }
 
         public bool EhValido()

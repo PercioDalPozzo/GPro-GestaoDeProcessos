@@ -4,10 +4,14 @@ namespace Aplicacao.Dominio.CadastroProcesso
 {
     public interface IRepProcesso
     {
-        Processo Find(int id);
-
         IQueryable<Processo> Recuperar();
 
+        Processo Find(int id);
+
+        void Remover(Processo processo);
+
         void Salvar(Processo processo);
+
+        void SaveChanges();
     }
 }

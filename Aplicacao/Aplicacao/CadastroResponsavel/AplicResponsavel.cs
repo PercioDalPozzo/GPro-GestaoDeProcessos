@@ -1,5 +1,4 @@
-﻿using Aplicacao.Dominio;
-using Aplicacao.Dominio.CadastroProcesso;
+﻿using Aplicacao.Dominio.CadastroProcesso;
 using Aplicacao.Dominio.CadastroResponsavel;
 using Aplicacao.Infra;
 using System.Collections.Generic;
@@ -24,12 +23,7 @@ namespace Aplicacao.Aplicacao.CadastroResponsavel
         {
             var responsavel = _repResponsavel.Find(view.Id);
 
-            var retorno = new RetornoPrepararEdicaoView();
-            retorno.Id = responsavel.Id;
-            retorno.Nome = responsavel.Nome;
-            retorno.Cpf = responsavel.Cpf.Value;
-            retorno.Email = responsavel.Email.Value;
-            retorno.Foto = responsavel.Foto;
+            var retorno = new RetornoPrepararEdicaoView(responsavel);
 
             var todosProcessos = _repProcessoResponsavel.Recuperar()
                                                         .Where(p => p.CodigoResponsavel == view.Id)
@@ -105,7 +99,7 @@ namespace Aplicacao.Aplicacao.CadastroResponsavel
             {
                 var numeroSemFormato = NumeroProcesso.RemoverFormatacao(filtro.NumeroProcesso);
                 var codigosResponsaveis = _repProcessoResponsavel.Recuperar()
-                                                                 .Where(p => p.Processo.NumeroProcesso.Value.ToLower() == numeroSemFormato.ToLower())
+                                                                 .Where(p => p.Processo.NumeroProcesso.Value == numeroSemFormato)
                                                                  .Select(p => p.CodigoResponsavel)
                                                                  .ToList();
                 query = query.Where(p => codigosResponsaveis.Contains(p.Id));

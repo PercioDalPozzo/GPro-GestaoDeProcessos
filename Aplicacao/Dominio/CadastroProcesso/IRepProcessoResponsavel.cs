@@ -6,6 +6,8 @@ namespace Aplicacao.Dominio.CadastroProcesso
     {
         IQueryable<ProcessoResponsavel> Recuperar();
 
+        void Remover(ProcessoResponsavel processoResponsavel);
+
         void Salvar(ProcessoResponsavel ProcessoResponsavel);
     }
 }
