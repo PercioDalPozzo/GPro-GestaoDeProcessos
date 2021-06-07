@@ -79,7 +79,7 @@ namespace Aplicacao.Dominio.CadastroProcesso
             var retorno = new List<int>();
             var processoDaVez = processo;
 
-            while (processoDaVez.CodigoProcessoPai.HasValue)
+            while (processoDaVez != null && processoDaVez.CodigoProcessoPai.HasValue)
             {
                 retorno.Add(processoDaVez.CodigoProcessoPai.Value);
                 processoDaVez = processoDaVez.ProcessoPai;

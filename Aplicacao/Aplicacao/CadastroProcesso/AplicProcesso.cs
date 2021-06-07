@@ -135,13 +135,16 @@ namespace Aplicacao.Aplicacao.CadastroProcesso
             processo.PastaFisica = view.PastaFisica;
             processo.Descricao = view.Descricao;
             processo.Situacao = view.Situacao;
-            processo.CodigoProcessoPai = view.CodigoProcessoPai;
+            if (view.CodigoProcessoPai.HasValue)
+            {
+                processo.SetarProcessoPai(_repProcesso.Find(view.CodigoProcessoPai.Value));
+            }
 
             ResolveCrudResponsaveis(processo, view);
 
             _validadorProcesso.ValidarCadastro(processo);
 
-            _repProcesso.Salvar(processo);
+
             _repProcesso.SaveChanges();
 
             return new RetornoSalvarView(processo);
@@ -165,14 +168,18 @@ namespace Aplicacao.Aplicacao.CadastroProcesso
             {
                 var responsavel = _repResponsavel.Find(reg.CodigoResponsavel);
                 var novo = new ProcessoResponsavel(processo, responsavel);
-                _repProcessoResponsavel.Salvar(novo);
+                _repProcessoResponsavel.Attach(novo);
             }
         }
 
         private Processo ResolverInserirEditar(SalvarProcessoView view)
         {
             if (view.Inserindo())
-                return new Processo();
+            {
+                var novo = new Processo();
+                _repProcesso.Attach(novo);
+                return novo;
+            }
 
             return _repProcesso.Find(view.Id);
 

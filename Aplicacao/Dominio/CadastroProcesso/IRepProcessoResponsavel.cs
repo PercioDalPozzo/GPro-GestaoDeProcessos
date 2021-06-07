@@ -8,6 +8,6 @@ namespace Aplicacao.Dominio.CadastroProcesso
 
         void Remover(ProcessoResponsavel processoResponsavel);
 
-        void Salvar(ProcessoResponsavel ProcessoResponsavel);
+        void Attach(ProcessoResponsavel ProcessoResponsavel);
     }
 }

@@ -28,12 +28,9 @@ namespace Repositorio.Repositorios
             _contexto.Set<T>().Remove(entidade);
         }
 
-        public void Salvar(T entidade)
+        public void Attach(T entidade)
         {
-            if (entidade.Id == 0)
-                _contexto.Set<T>().Attach(entidade);
-            else
-                _contexto.Set<T>().Update(entidade);
+            _contexto.Set<T>().Attach(entidade);
         }
 
         public void SaveChanges()

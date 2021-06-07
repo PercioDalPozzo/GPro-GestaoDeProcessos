@@ -159,7 +159,6 @@ namespace Aplicacao.Aplicacao.CadastroResponsavel
 
             _validadorResponsavel.ValidarCadastro(resp);
 
-            _repResponsavel.Salvar(resp);
             _repResponsavel.SaveChanges();
 
             return new RetornoSalvarView(resp);
@@ -168,7 +167,11 @@ namespace Aplicacao.Aplicacao.CadastroResponsavel
         private Responsavel ResolverInserirEditar(SalvarResponsavelView view)
         {
             if (view.Inserindo())
-                return new Responsavel();
+            {
+                var novo = new Responsavel();
+                _repResponsavel.Attach(novo);
+                return novo;
+            }
 
             return _repResponsavel.Find(view.Id);
 

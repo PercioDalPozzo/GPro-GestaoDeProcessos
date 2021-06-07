@@ -10,7 +10,7 @@ namespace Aplicacao.Dominio.CadastroProcesso
 
         void Remover(Processo processo);
 
-        void Salvar(Processo processo);
+        void Attach(Processo processo);
 
         void SaveChanges();
     }

@@ -10,7 +10,7 @@ namespace Aplicacao.Dominio.CadastroResponsavel
 
         void Remover(Responsavel resp);
 
-        void Salvar(Responsavel responsavel);
+        void Attach(Responsavel responsavel);
 
         void SaveChanges();
     }
