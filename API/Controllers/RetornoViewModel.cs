@@ -2,11 +2,11 @@
 {
     public class RetornoViewModel
     {
-        public object Content { get; private set; }
-        public bool Sucesso { get; private set; }
-        public string Msg { get; private set; }
+        public object Content { get; set; }
+        public bool Sucesso { get; set; }
+        public string Msg { get; set; }
 
-        internal static RetornoViewModel RetornoErro(string message)
+        public static RetornoViewModel RetornoErro(string message)
         {
             return new RetornoViewModel
             {
@@ -15,7 +15,7 @@
             };
         }
 
-        internal static RetornoViewModel RetornoSucesso()
+        public static RetornoViewModel RetornoSucesso()
         {
             var ret = new RetornoViewModel
             {
@@ -25,7 +25,7 @@
             return ret;
         }
 
-        internal static RetornoViewModel RetornoSucesso(object content)
+        public static RetornoViewModel RetornoSucesso(object content)
         {
             var ret = new RetornoViewModel
             {

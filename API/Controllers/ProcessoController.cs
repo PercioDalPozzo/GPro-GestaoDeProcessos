@@ -5,16 +5,18 @@ using System;
 
 namespace API.Controllers
 {
+    [ApiController]
+    [Route("Processo")]
     public class ProcessoController : Controller
     {
         private readonly IAplicProcesso _aplicProcesso;
-
 
         public ProcessoController(IAplicProcesso aplicProcesso)
         {
             _aplicProcesso = aplicProcesso;
         }
 
+        [HttpPost("PrepararEdicao")]
         public RetornoViewModel PrepararEdicao(IdView view)
         {
             try
@@ -28,7 +30,8 @@ namespace API.Controllers
             }
         }
 
-        public RetornoViewModel Pesquisar(FiltroPesquisarView view)
+        [HttpPost("Pesquisar")]
+        public RetornoViewModel Pesquisar(FiltroPesquisarProcessoView view)
         {
             try
             {
@@ -41,6 +44,7 @@ namespace API.Controllers
             }
         }
 
+        [HttpPost("Salvar")]
         public RetornoViewModel Salvar(SalvarProcessoView view)
         {
             try
@@ -54,6 +58,7 @@ namespace API.Controllers
             }
         }
 
+        [HttpPost("Remover")]
         public RetornoViewModel Remover(IdView view)
         {
             try
@@ -66,7 +71,5 @@ namespace API.Controllers
                 return RetornoViewModel.RetornoErro(e.Message);
             }
         }
-
-
     }
 }

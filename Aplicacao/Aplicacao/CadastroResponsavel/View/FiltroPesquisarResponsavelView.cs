@@ -2,7 +2,7 @@
 
 namespace Aplicacao.Aplicacao.CadastroResponsavel
 {
-    public class FiltroPesquisarView : FiltroPaginadoView
+    public class FiltroPesquisarResponsavelView : FiltroPaginadoView
     {
         public string Nome { get; set; }
         public string Cpf { get; set; }

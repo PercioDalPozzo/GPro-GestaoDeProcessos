@@ -55,7 +55,7 @@ namespace Aplicacao.Aplicacao.CadastroResponsavel
             return retorno;
         }
 
-        public RetornoPesquisaView Pesquisar(FiltroPesquisarView filtro)
+        public RetornoPesquisaView Pesquisar(FiltroPesquisarResponsavelView filtro)
         {
             var query = AplicarFiltros(filtro);
 
@@ -82,7 +82,7 @@ namespace Aplicacao.Aplicacao.CadastroResponsavel
             };
         }
 
-        private IQueryable<Responsavel> AplicarFiltros(FiltroPesquisarView filtro)
+        private IQueryable<Responsavel> AplicarFiltros(FiltroPesquisarResponsavelView filtro)
         {
             var query = _repResponsavel.Recuperar();
 

@@ -4,7 +4,7 @@ using System;
 
 namespace Aplicacao.Aplicacao.CadastroProcesso
 {
-    public class FiltroPesquisarView : FiltroPaginadoView
+    public class FiltroPesquisarProcessoView : FiltroPaginadoView
     {
         public string NumeroProcesso { get; set; }
         public DateTime? DataDistribuicaoIni { get; set; }

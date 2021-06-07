@@ -45,7 +45,17 @@ namespace API
             services.AddSingleton(Configuration);
             services.AddHttpClient();
             services.AddControllers();
-            services.AddSwaggerGen();
+
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "Informações da API",
+                    Version = "v1",
+                    Description = "GPro info",
+                });
+            });
 
             services.AddControllersWithViews();
         }
@@ -77,7 +87,7 @@ namespace API
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Responsavel");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gestão processos");
             });
         }
     }

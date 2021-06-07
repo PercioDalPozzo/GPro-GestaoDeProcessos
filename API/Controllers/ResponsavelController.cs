@@ -5,6 +5,8 @@ using System;
 
 namespace API.Controllers
 {
+    [ApiController]
+    [Route("Responsavel")]
     public class ResponsavelController : Controller
     {
         private readonly IAplicResponsavel _aplicResponsavel;
@@ -15,12 +17,13 @@ namespace API.Controllers
             _aplicResponsavel = aplicResponsavel;
         }
 
-        [HttpGet]
+        [HttpGet("Ping")]
         public RetornoViewModel Ping()
         {
             return RetornoViewModel.RetornoSucesso("Ping..." + DateTime.Now.ToLongTimeString());
         }
 
+        [HttpPost("PrepararEdicao")]
         public RetornoViewModel PrepararEdicao(IdView view)
         {
             try
@@ -34,7 +37,8 @@ namespace API.Controllers
             }
         }
 
-        public RetornoViewModel Pesquisar(FiltroPesquisarView view)
+        [HttpPost("Pesquisar")]
+        public RetornoViewModel Pesquisar(FiltroPesquisarResponsavelView view)
         {
             try
             {
@@ -47,6 +51,7 @@ namespace API.Controllers
             }
         }
 
+        [HttpPost("Salvar")]
         public RetornoViewModel Salvar(SalvarResponsavelView view)
         {
             try
@@ -60,6 +65,7 @@ namespace API.Controllers
             }
         }
 
+        [HttpPost("Remover")]
         public RetornoViewModel Remover(IdView view)
         {
             try
@@ -72,7 +78,5 @@ namespace API.Controllers
                 return RetornoViewModel.RetornoErro(e.Message);
             }
         }
-
-
     }
 }

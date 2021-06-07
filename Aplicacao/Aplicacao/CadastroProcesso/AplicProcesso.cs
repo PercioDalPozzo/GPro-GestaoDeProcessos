@@ -46,7 +46,7 @@ namespace Aplicacao.Aplicacao.CadastroProcesso
             return retorno;
         }
 
-        public RetornoPesquisaView Pesquisar(FiltroPesquisarView filtro)
+        public RetornoPesquisaView Pesquisar(FiltroPesquisarProcessoView filtro)
         {
             var query = AplicarFiltros(filtro);
 
@@ -90,7 +90,7 @@ namespace Aplicacao.Aplicacao.CadastroProcesso
         }
 
 
-        private IQueryable<Processo> AplicarFiltros(FiltroPesquisarView filtro)
+        private IQueryable<Processo> AplicarFiltros(FiltroPesquisarProcessoView filtro)
         {
             var query = _repProcesso.Recuperar();
 
