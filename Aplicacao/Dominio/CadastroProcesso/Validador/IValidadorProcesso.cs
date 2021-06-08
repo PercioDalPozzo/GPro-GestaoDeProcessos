@@ -2,7 +2,7 @@
 {
     public interface IValidadorProcesso
     {
-        void ValidarCadastro(Processo resp);
-        //void ExcecaoSeTiverVinculo(Processo resp);
+        void ValidarCadastro(Processo processo);
+        void ValidarExclusao(Processo processo);
     }
 }

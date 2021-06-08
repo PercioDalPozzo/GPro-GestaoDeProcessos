@@ -76,7 +76,7 @@ namespace Aplicacao.Dominio.CadastroProcesso
                 throw new Exception("A ligação com o processo vinculado irá excede o limite de 4 processos na hierarquia.");
 
             // Se o processo tiver filho, deve incrementar o contador
-            // Caso contrário, contados do filho é zerado
+            // Caso contrário, contador do filho é zerado
             if (processo.ProcessoFilho.Any())
                 quantNiveisFilho++;
             else
@@ -87,7 +87,6 @@ namespace Aplicacao.Dominio.CadastroProcesso
                 BuscarMaiorHierarquiaSucessora(filho, quantNiveisAntecessores, quantNiveisFilho);
             }
         }
-
 
         private void ExcecaoSeTiverDuplicidade(Processo processo)
         {
@@ -101,6 +100,15 @@ namespace Aplicacao.Dominio.CadastroProcesso
                     existente.PastaFisica,
                     existente.DataDistribuicao.HasValue ? existente.DataDistribuicao.Value.NossoFormato() : "Sem data"
                     ));
+        }
+
+        public void ValidarExclusao(Processo processo)
+        {
+            if (processo.Finalizado())
+                throw new Exception("O processo está finalizado e não poderá ser removido.");
+
+            if (processo.ProcessoFilho.Any())
+                throw new Exception("O processo está vinculado a outro(s) processo(s) e não pode ser removido.");
         }
     }
 }

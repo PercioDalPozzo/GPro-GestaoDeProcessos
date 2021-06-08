@@ -190,22 +190,19 @@ namespace Aplicacao.Aplicacao.CadastroProcesso
             return processo;
         }
 
-        //public void Remover(IdView view)
-        //{
-        //    var resp = _repProcesso.Find(view.Id);
-
-        //    _validadorProcesso.ExcecaoSeTiverVinculo(resp);
-
-        //    _repProcesso.Remover(resp);
-        //    _repProcesso.SaveChanges();
-        //}
-
-
-
-
         public void Remover(IdView view)
         {
-            throw new System.NotImplementedException();
+            var processo = _repProcesso.Find(view.Id);
+
+            _validadorProcesso.ValidarExclusao(processo);
+
+
+            foreach (var procResp in processo.ProcessoResponsavel)
+            {
+                _repProcessoResponsavel.Remover(procResp);
+            }
+            _repProcesso.Remover(processo);
+            _repProcesso.SaveChanges();
         }
     }
 }
