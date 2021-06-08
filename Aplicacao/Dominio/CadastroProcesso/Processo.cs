@@ -20,6 +20,7 @@ namespace Aplicacao.Dominio.CadastroProcesso
         public EnumSituacaoProcesso Situacao { get; set; }
         public int? CodigoProcessoPai { get; set; }
         public virtual Processo ProcessoPai { get; set; }
+        public virtual List<Processo> ProcessoFilho { get; set; }
         public virtual List<ProcessoResponsavel> ProcessoResponsavel { get; set; }
 
 

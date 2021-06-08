@@ -1,6 +1,7 @@
 ﻿using Aplicacao.Dominio.CadastroProcesso;
 using Aplicacao.Dominio.CadastroResponsavel;
 using Aplicacao.Infra;
+using System;
 using System.Linq;
 
 namespace Aplicacao.Aplicacao.CadastroProcesso
@@ -31,20 +32,23 @@ namespace Aplicacao.Aplicacao.CadastroProcesso
             if (processo.ProcessoPai != null)
                 retorno.ProcessoPai = new RetornoPrepararEdicaoView(processo.ProcessoPai);
 
-            // Filho
-            var processoFilho = _repProcesso.Recuperar().FirstOrDefault(p => p.CodigoProcessoPai == processo.Id);
-            if (processoFilho != null)
-            {
-                retorno.ProcessoFilho = new RetornoPrepararEdicaoView(processoFilho);
-
-                // Neto
-                var processoNeto = _repProcesso.Recuperar().FirstOrDefault(p => p.CodigoProcessoPai == processoFilho.Id);
-                if (processoNeto != null)
-                    retorno.ProcessoNeto = new RetornoPrepararEdicaoView(processoNeto);
-            }
+            AdicionarFilhosRecursivo(processo, retorno);
 
             return retorno;
         }
+
+        private void AdicionarFilhosRecursivo(Processo processo, RetornoPrepararEdicaoView retornoView)
+        {
+            foreach (var filho in processo.ProcessoFilho)
+            {
+                var novoFilhoView = new RetornoPrepararEdicaoView(filho);
+                retornoView.ProcessoFilho.Add(novoFilhoView);
+
+                AdicionarFilhosRecursivo(filho, novoFilhoView);
+            }
+        }
+
+
 
         public RetornoPesquisaView Pesquisar(FiltroPesquisarProcessoView filtro)
         {
@@ -88,7 +92,6 @@ namespace Aplicacao.Aplicacao.CadastroProcesso
                 Registros = registros
             };
         }
-
 
         private IQueryable<Processo> AplicarFiltros(FiltroPesquisarProcessoView filtro)
         {
@@ -181,8 +184,10 @@ namespace Aplicacao.Aplicacao.CadastroProcesso
                 return novo;
             }
 
-            return _repProcesso.Find(view.Id);
-
+            var processo = _repProcesso.Find(view.Id);
+            if (processo.Finalizado())
+                throw new Exception("O processo está finalizado e não poderá ser editado.");
+            return processo;
         }
 
         //public void Remover(IdView view)

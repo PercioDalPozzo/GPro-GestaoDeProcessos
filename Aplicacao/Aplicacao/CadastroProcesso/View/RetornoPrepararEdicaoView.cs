@@ -15,7 +15,11 @@ namespace Aplicacao.Aplicacao.CadastroProcesso
             PastaFisica = processo.PastaFisica;
             Descricao = processo.Descricao;
             Situacao = processo.Situacao;
+            Finalizado = processo.Finalizado();
             CodigoProcessoPai = processo.CodigoProcessoPai;
+
+            ProcessoFilho = new List<RetornoPrepararEdicaoView>();
+            ProcessoResponsavel = new List<RetornoPrepararEdicaoResponsavelView>();
         }
 
         public int Id { get; set; }
@@ -25,13 +29,11 @@ namespace Aplicacao.Aplicacao.CadastroProcesso
         public string PastaFisica { get; set; }
         public string Descricao { get; set; }
         public EnumSituacaoProcesso Situacao { get; set; }
-
+        public bool Finalizado { get; set; }
         public int? CodigoProcessoPai { get; set; }
 
         public RetornoPrepararEdicaoView ProcessoPai { get; set; }
-        public RetornoPrepararEdicaoView ProcessoFilho { get; set; }
-        public RetornoPrepararEdicaoView ProcessoNeto { get; set; }
-
+        public List<RetornoPrepararEdicaoView> ProcessoFilho { get; set; }
         public List<RetornoPrepararEdicaoResponsavelView> ProcessoResponsavel { get; set; }
     }
 
