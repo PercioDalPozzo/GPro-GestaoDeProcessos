@@ -1,6 +1,4 @@
-using Aplicacao.Aplicacao;
 using Aplicacao.Aplicacao.CadastroResponsavel;
-using Aplicacao.Dominio;
 using Aplicacao.Dominio.CadastroProcesso;
 using Aplicacao.Dominio.CadastroResponsavel;
 using Aplicacao.Infra;
@@ -34,29 +32,26 @@ namespace Testes
         [TestMethod]
         public void Test_NomeNaoInformado()
         {
-            // arrange
-            string msg = "";
+            // arrange            
             var view = new SalvarResponsavelView();
 
             // action 
             try
             {
                 _aplicResponsavel.Salvar(view);
+                Assert.Fail("Teste deve gerar exceção");
             }
             catch (Exception e)
             {
-                msg = e.Message;
+                // assert
+                Assert.AreEqual("Nome do responsável deve ser informado.", e.Message);
             }
-
-            // assert
-            Assert.AreEqual("Nome do responsável deve ser informado.", msg);
         }
 
         [TestMethod]
         public void Test_LimiteNomeResponsavel()
         {
-            // arrange
-            string msg = "";
+            // arrange       
             var view = new SalvarResponsavelView();
             view.Nome = "Aqui tem 151 caracteres................................................................................................................................";
 
@@ -64,21 +59,19 @@ namespace Testes
             try
             {
                 _aplicResponsavel.Salvar(view);
+                Assert.Fail("Teste deve gerar exceção");
             }
             catch (Exception e)
             {
-                msg = e.Message;
+                // assert
+                Assert.AreEqual("Nome deve possuir no máximo 150 caracteres.", e.Message);
             }
-
-            // assert
-            Assert.AreEqual("Nome deve possuir no máximo 150 caracteres.", msg);
         }
 
         [TestMethod]
         public void Test_CpfNaoInformado()
         {
             // arrange
-            string msg = "";
             var view = new SalvarResponsavelView();
             view.Nome = "Pércio";
 
@@ -86,21 +79,19 @@ namespace Testes
             try
             {
                 _aplicResponsavel.Salvar(view);
+                Assert.Fail("Teste deve gerar exceção");
             }
             catch (Exception e)
             {
-                msg = e.Message;
+                // assert
+                Assert.AreEqual("CPF do responsável deve ser informado.", e.Message);
             }
-
-            // assert
-            Assert.AreEqual("CPF do responsável deve ser informado.", msg);
         }
 
         [TestMethod]
         public void Test_CpfInvalido()
         {
             // arrange
-            string msg = "";
             var view = new SalvarResponsavelView();
             view.Nome = "Pércio";
             view.Cpf = "12345678901";
@@ -109,21 +100,19 @@ namespace Testes
             try
             {
                 _aplicResponsavel.Salvar(view);
+                Assert.Fail("Teste deve gerar exceção");
             }
             catch (Exception e)
             {
-                msg = e.Message;
+                // assert
+                Assert.AreEqual("CPF inválido 12345678901.", e.Message);
             }
-
-            // assert
-            Assert.AreEqual("CPF inválido 12345678901.", msg);
         }
 
         [TestMethod]
         public void Test_EmailNaoInformado()
         {
             // arrange
-            string msg = "";
             var view = new SalvarResponsavelView();
             view.Nome = "Pércio";
             view.Cpf = "73508085007";
@@ -132,21 +121,19 @@ namespace Testes
             try
             {
                 _aplicResponsavel.Salvar(view);
+                Assert.Fail("Teste deve gerar exceção");
             }
             catch (Exception e)
             {
-                msg = e.Message;
+                // assert
+                Assert.AreEqual("E-mail do responsável deve ser informado.", e.Message);
             }
-
-            // assert
-            Assert.AreEqual("E-mail do responsável deve ser informado.", msg);
         }
 
         [TestMethod]
         public void Test_EmailInvalido()
         {
             // arrange
-            string msg = "";
             var view = new SalvarResponsavelView();
             view.Nome = "Pércio";
             view.Cpf = "73508085007";
@@ -156,21 +143,19 @@ namespace Testes
             try
             {
                 _aplicResponsavel.Salvar(view);
+                Assert.Fail("Teste deve gerar exceção");
             }
             catch (Exception e)
             {
-                msg = e.Message;
+                // assert
+                Assert.AreEqual("E-mail inválido EmailNadaHaver.", e.Message);
             }
-
-            // assert
-            Assert.AreEqual("E-mail inválido EmailNadaHaver.", msg);
         }
 
         [TestMethod]
         public void Test_CpfDuplicado()
         {
             // arrange
-            string msg = "";
             var view = new SalvarResponsavelView();
             view.Nome = "Pércio";
             view.Cpf = "73508085007";
@@ -184,21 +169,19 @@ namespace Testes
             try
             {
                 _aplicResponsavel.Salvar(view);
+                Assert.Fail("Teste deve gerar exceção");
             }
             catch (Exception e)
             {
-                msg = e.Message;
+                // assert
+                Assert.AreEqual("O CPF já está em uso pelo responsável Pércio.", e.Message);
             }
-
-            // assert
-            Assert.AreEqual("O CPF já está em uso pelo responsável Pércio.", msg);
         }
 
         [TestMethod]
         public void Test_RemocaoComVinculo()
         {
             // arrange
-            string msg = "";
             var view = new IdView();
             view.Id = 1;
 
@@ -226,16 +209,13 @@ namespace Testes
             try
             {
                 _aplicResponsavel.Remover(view);
+                Assert.Fail("Teste deve gerar exceção");
             }
             catch (Exception e)
             {
-                msg = e.Message;
+                // assert
+                Assert.AreEqual("O responsável não pode ser removido pois está vinculado ao processo 0123456789. Processos vinculados: 2.", e.Message);
             }
-
-            // assert
-            Assert.AreEqual("O responsável não pode ser removido pois está vinculado ao processo 0123456789. Processos vinculados: 2.", msg);
         }
-
-
     }
 }

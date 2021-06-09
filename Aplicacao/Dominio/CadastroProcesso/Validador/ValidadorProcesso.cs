@@ -8,12 +8,10 @@ namespace Aplicacao.Dominio.CadastroProcesso
     public class ValidadorProcesso : IValidadorProcesso
     {
         private readonly IRepProcesso _repProcesso;
-        private readonly IRepProcessoResponsavel _repProcessoResponsavel;
 
-        public ValidadorProcesso(IRepProcesso repProcesso, IRepProcessoResponsavel repProcessoResponsavel)
+        public ValidadorProcesso(IRepProcesso repProcesso)
         {
             _repProcesso = repProcesso;
-            _repProcessoResponsavel = repProcessoResponsavel;
         }
 
 
@@ -36,24 +34,41 @@ namespace Aplicacao.Dominio.CadastroProcesso
             if (processo.CodigoProcessoPai == processo.Id)
                 throw new Exception("O processo não pode estar vinculado a ele mesmo.");
 
-            var codigosHierarquia = new List<int>() { };
-            var processoDaVez = processo;
-            while (processoDaVez != null && processoDaVez.CodigoProcessoPai.HasValue)
-            {
-                if (codigosHierarquia.Contains(processoDaVez.Id))
-                    throw new Exception("O processo já faz parte da hierarquia.");
+            var processoChefao = BuscarPaiMaisVelho(processo);
 
-                codigosHierarquia.Add(processoDaVez.Id);
+            VerificarComTodosFilhosDaCadeia(processoChefao, new List<int>() { processoChefao.Id });
+        }
+
+        private Processo BuscarPaiMaisVelho(Processo processo)
+        {
+            var processoDaVez = processo;
+            while (processoDaVez != null && processoDaVez.ProcessoPai != null)
+            {
                 processoDaVez = processoDaVez.ProcessoPai;
             }
+
+            return processoDaVez;
         }
+
+        public void VerificarComTodosFilhosDaCadeia(Processo processo, List<int> codigosHierarquia)
+        {
+            foreach (var filho in processo.ProcessoFilho)
+            {
+                codigosHierarquia.Add(filho.Id);
+
+                if (codigosHierarquia.Distinct().Count() != codigosHierarquia.Count())
+                    throw new Exception("O processo já faz parte da hierarquia.");
+
+                VerificarComTodosFilhosDaCadeia(filho, codigosHierarquia);
+            }
+        }
+
 
         private void ExcecaoSeHierarquiaExcederQuatroNiveis(Processo processo)
         {
             // Aqui cabe um comentario.
             // Primeiramente é obtido a quantidade de niveis dos antecessores            
             var quantNiveisAntecessores = BuscarQuantHierarquiaAntecessor(processo);
-
 
             BuscarMaiorHierarquiaSucessora(processo, quantNiveisAntecessores, 0);
         }
@@ -62,7 +77,7 @@ namespace Aplicacao.Dominio.CadastroProcesso
         {
             int count = 1;
             var processoDaVez = processo;
-            while (processoDaVez != null && processoDaVez.CodigoProcessoPai.HasValue)
+            while (processoDaVez != null && processoDaVez.ProcessoPai != null)
             {
                 count++;
                 processoDaVez = processoDaVez.ProcessoPai;
@@ -73,7 +88,7 @@ namespace Aplicacao.Dominio.CadastroProcesso
         private void BuscarMaiorHierarquiaSucessora(Processo processo, int quantNiveisAntecessores, int quantNiveisFilho)
         {
             if ((quantNiveisAntecessores + quantNiveisFilho) > 4)
-                throw new Exception("A ligação com o processo vinculado irá excede o limite de 4 processos na hierarquia.");
+                throw new Exception("A ligação com o processo vinculado irá exceder o limite de 4 processos na hierarquia.");
 
             // Se o processo tiver filho, deve incrementar o contador
             // Caso contrário, contador do filho é zerado

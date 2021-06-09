@@ -10,6 +10,7 @@ namespace Aplicacao.Dominio.CadastroProcesso
         public Processo()
         {
             ProcessoResponsavel = new List<ProcessoResponsavel>();
+            ProcessoFilho = new List<Processo>();
         }
 
         public string Descricao { get; set; }
@@ -24,7 +25,7 @@ namespace Aplicacao.Dominio.CadastroProcesso
         public virtual List<ProcessoResponsavel> ProcessoResponsavel { get; set; }
 
 
-        internal void SetarProcessoPai(Processo processo)
+        public void SetarProcessoPai(Processo processo)
         {
             ProcessoPai = processo;
             CodigoProcessoPai = processo.Id;

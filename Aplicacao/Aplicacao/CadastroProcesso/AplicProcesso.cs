@@ -138,15 +138,14 @@ namespace Aplicacao.Aplicacao.CadastroProcesso
             processo.PastaFisica = view.PastaFisica;
             processo.Descricao = view.Descricao;
             processo.Situacao = view.Situacao;
+
             if (view.CodigoProcessoPai.HasValue)
-            {
                 processo.SetarProcessoPai(_repProcesso.Find(view.CodigoProcessoPai.Value));
-            }
+
 
             ResolveCrudResponsaveis(processo, view);
 
             _validadorProcesso.ValidarCadastro(processo);
-
 
             _repProcesso.SaveChanges();
 
