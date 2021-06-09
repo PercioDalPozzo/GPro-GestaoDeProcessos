@@ -2,6 +2,7 @@ using Aplicacao.Aplicacao.CadastroProcesso;
 using Aplicacao.Aplicacao.CadastroResponsavel;
 using Aplicacao.Dominio.CadastroProcesso;
 using Aplicacao.Dominio.CadastroResponsavel;
+using Aplicacao.EnvioEmail;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,7 @@ namespace API
             services.AddScoped<IRepResponsavel, RepResponsavel>();
             services.AddScoped<IValidadorProcesso, ValidadorProcesso>();
             services.AddScoped<IValidadorResponsavel, ValidadorResponsavel>();
+            services.AddScoped<IServEmail, ServEmail>();
 
 
             services.AddControllers()

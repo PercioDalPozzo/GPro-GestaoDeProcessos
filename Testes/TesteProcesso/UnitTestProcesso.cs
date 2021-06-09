@@ -1,6 +1,7 @@
 ﻿using Aplicacao.Aplicacao.CadastroProcesso;
 using Aplicacao.Dominio.CadastroProcesso;
 using Aplicacao.Dominio.CadastroResponsavel;
+using Aplicacao.EnvioEmail;
 using Aplicacao.Infra;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -19,15 +20,17 @@ namespace Testes.TesteProcesso
         Mock<IRepProcesso> mockRepProcesso;
         Mock<IRepResponsavel> mockRepResponsavel;
         Mock<IRepProcessoResponsavel> mockRepProcessoResponsavel;
+        Mock<IServEmail> mockServEmail;
 
         public UnitTestProcesso()
         {
             mockRepProcesso = new Mock<IRepProcesso>();
             mockRepResponsavel = new Mock<IRepResponsavel>();
             mockRepProcessoResponsavel = new Mock<IRepProcessoResponsavel>();
+            mockServEmail = new Mock<IServEmail>();
 
             _validadorProcesso = new ValidadorProcesso(mockRepProcesso.Object);
-            _aplicProcesso = new AplicProcesso(mockRepProcesso.Object, mockRepResponsavel.Object, mockRepProcessoResponsavel.Object, _validadorProcesso);
+            _aplicProcesso = new AplicProcesso(mockRepProcesso.Object, mockRepResponsavel.Object, mockRepProcessoResponsavel.Object, _validadorProcesso, mockServEmail.Object);
         }
 
         [TestMethod]

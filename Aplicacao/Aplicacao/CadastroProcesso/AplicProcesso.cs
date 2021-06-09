@@ -1,5 +1,6 @@
 ﻿using Aplicacao.Dominio.CadastroProcesso;
 using Aplicacao.Dominio.CadastroResponsavel;
+using Aplicacao.EnvioEmail;
 using Aplicacao.Infra;
 using System;
 using System.Linq;
@@ -12,13 +13,15 @@ namespace Aplicacao.Aplicacao.CadastroProcesso
         private readonly IRepResponsavel _repResponsavel;
         private readonly IRepProcessoResponsavel _repProcessoResponsavel;
         private readonly IValidadorProcesso _validadorProcesso;
+        private readonly IServEmail _servEmail;
 
-        public AplicProcesso(IRepProcesso repProcesso, IRepResponsavel repResponsavel, IRepProcessoResponsavel repProcessoResponsavel, IValidadorProcesso validadorProcesso)
+        public AplicProcesso(IRepProcesso repProcesso, IRepResponsavel repResponsavel, IRepProcessoResponsavel repProcessoResponsavel, IValidadorProcesso validadorProcesso, IServEmail servEmail)
         {
             _repProcesso = repProcesso;
             _repResponsavel = repResponsavel;
             _repProcessoResponsavel = repProcessoResponsavel;
             _validadorProcesso = validadorProcesso;
+            _servEmail = servEmail;
         }
 
         public RetornoPrepararEdicaoView PrepararEdicao(IdView view)
@@ -142,15 +145,19 @@ namespace Aplicacao.Aplicacao.CadastroProcesso
             if (view.CodigoProcessoPai.HasValue)
                 processo.SetarProcessoPai(_repProcesso.Find(view.CodigoProcessoPai.Value));
 
-
             ResolveCrudResponsaveis(processo, view);
 
             _validadorProcesso.ValidarCadastro(processo);
 
             _repProcesso.SaveChanges();
 
+
+            EnviarEmailAosResponsaveis(processo, view);
+
+
             return new RetornoSalvarView(processo);
         }
+
 
         private void ResolveCrudResponsaveis(Processo processo, SalvarProcessoView view)
         {
@@ -195,13 +202,62 @@ namespace Aplicacao.Aplicacao.CadastroProcesso
 
             _validadorProcesso.ValidarExclusao(processo);
 
-
             foreach (var procResp in processo.ProcessoResponsavel)
             {
                 _repProcessoResponsavel.Remover(procResp);
             }
             _repProcesso.Remover(processo);
             _repProcesso.SaveChanges();
+
+            EnviarEmailDeRemocaoProcesso(processo);
+        }
+
+        private void EnviarEmailDeRemocaoProcesso(Processo processo)
+        {
+            var emailView = new EnviarEmailView()
+            {
+                Destinatarios = processo.ProcessoResponsavel.Select(p => p.Responsavel.Email.Value).ToList(),
+                Assunto = "Informações do processo",
+                Msg = string.Format("O processo de número {0} foi removido.", processo.NumeroProcesso.Formatar())
+            };
+
+            try
+            {
+                _servEmail.EnviarEmail(emailView);
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void EnviarEmailAosResponsaveis(Processo processo, SalvarProcessoView view)
+        {
+            var novosResponsaveis = view.ProcessoResponsavel.Where(p => p.Inserindo()).Select(p => p.CodigoResponsavel).ToList();
+            var resps = processo.ProcessoResponsavel.Where(p => novosResponsaveis.Contains(p.CodigoResponsavel)).Select(p => p.Responsavel.Email.Value).ToList();
+
+
+            string msg = "";
+            if (view.Inserindo())
+                msg = string.Format("Você foi cadastrado como envolvido no processo de número {0}.", processo.NumeroProcesso.Formatar());
+            else
+                msg = string.Format("Você foi adicionado como envolvido no processo de número {0}.", processo.NumeroProcesso.Formatar());
+
+            var emailView = new EnviarEmailView()
+            {
+                Destinatarios = resps,
+                Assunto = "Informações do processo",
+                Msg = msg
+            };
+
+            try
+            {
+                _servEmail.EnviarEmail(emailView);
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }
