@@ -1,5 +1,5 @@
 # GPro - Gestão De Processos
-![Web 1](https://img.shields.io/github/license/perciodalpozzo/GPro-GestaoDeProcessos)
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/PercioDalPozzo/GPro-GestaoDeProcessos/blob/master/LICENSE)
 
 # Sobre o projeto
 Este projeto refere-se a uma API para gestão de processos judiciais.
