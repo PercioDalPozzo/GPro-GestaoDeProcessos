@@ -118,6 +118,31 @@ O script abaixo zera o banco e popula com a carga de dados citada.<br>
 Utilizado o Serilog. Está configurado para gravar o log das requisições na pasta "Log" dentro da pasta da aplicação.
 
 
+# Docker
+```
+https://docs.microsoft.com/pt-br/dotnet/core/docker/build-container?tabs=windows
+
+// criar image
+docker build -t gpro-image -f Dockerfile .
+
+docker images
+
+// criar container
+docker create --name gpro-container gpro-image
+
+docker ps -a
+
+// startar
+docker start gpro-container
+
+
+docker run -it --rm -p 5000:80 --name gpro gpro-image
+
+
+
+DISM /Online /Enable-Feature /All /FeatureName:Microsoft-Hyper-V
+```
+
 # Autor 
 
 Pércio Ebsen Dal Pozzo
