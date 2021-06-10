@@ -41,6 +41,10 @@ Versão 4.16.1<br>
 Swagger <br>
 Swashbuckle.AspNetCore 5.5.1<br>
 <br>
+Serilog <br>
+Serilog.AspNetCore<br>
+Versão 4.1.0<br>
+<br>
 Para o LazyLoad - Intalar pode linha de comando pode dentro do VS<br>
 install-package Microsoft.EntityFrameworkCore.Proxies<br>
 
@@ -110,7 +114,34 @@ Cada processo foi vinculado a 3 responsáveis.<br>
 O script abaixo zera o banco e popula com a carga de dados citada.<br>
 <code>https://github.com/PercioDalPozzo/GPro-GestaoDeProcessos/blob/master/Repositorio/SQL/Script_teste_carga.sql</code>
 
+# Log
+Utilizado o Serilog. Está configurado para gravar o log das requisições na pasta "Log" dentro da pasta da aplicação.
 
+
+# Docker
+```
+https://docs.microsoft.com/pt-br/dotnet/core/docker/build-container?tabs=windows
+
+// criar image
+docker build -t gpro-image -f Dockerfile .
+
+docker images
+
+// criar container
+docker create --name gpro-container gpro-image
+
+docker ps -a
+
+// startar
+docker start gpro-container
+
+
+docker run -it --rm -p 5000:80 --name gpro gpro-image
+
+
+
+DISM /Online /Enable-Feature /All /FeatureName:Microsoft-Hyper-V
+```
 
 # Autor 
 
