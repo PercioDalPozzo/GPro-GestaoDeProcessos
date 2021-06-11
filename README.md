@@ -118,12 +118,24 @@ O script abaixo zera o banco e popula com a carga de dados citada.<br>
 Utilizado o Serilog. Está configurado para gravar o log das requisições na pasta "Log" dentro da pasta da aplicação.
 
 
-# Docker
+# Sujestão para melhoria no projeto
 ```
-https://docs.microsoft.com/pt-br/dotnet/core/docker/build-container?tabs=windows
+* Retornar as validações em uma listagem de criticas invés de uma exceção para cada validação.
 
-// criar image
-docker build -t gpro-image -f Dockerfile .
+*  Pesquisa de Responsável
+Não colocaria na pesquisa de responsável a responsabilidade de carregar os processos. 
+Julgo que o cadastro é apenas para cadastrar e não deve-se misturar processos complexos nesse local.
+Para sanar essa necessidade, minha sugestão seria criar uma outra ferramenta para colsulta como 
+um dashboard ou até mesmo um relatório que cruza essas informações.
+```
+
+# Docker
+* Material para referencia<br>
+<code>https://docs.microsoft.com/pt-br/dotnet/core/docker/build-container?tabs=windows</code>
+<br>
+<br>
+* Criar imagem
+docker build -t gpro-image -f Api/Dockerfile .
 
 docker images
 
