@@ -121,30 +121,28 @@ Utilizado o Serilog. Está configurado para gravar o log das requisições na pa
 # Sujestão para melhoria no projeto
 * Retornar as validações em uma listagem de criticas invés de uma exceção para cada validação.
 
-*  Pesquisa de Responsável
+* Pesquisa de Responsável
 Não colocaria na pesquisa de responsável a responsabilidade de carregar os processos. 
 Julgo que o cadastro é apenas para cadastrar e não deve-se misturar processos complexos nesse local.
-Para sanar essa necessidade, minha sugestão seria criar uma outra ferramenta para colsulta como 
+Para sanar essa necessidade, minha sugestão seria criar uma outra ferramenta para cosulta como 
 um dashboard ou até mesmo um relatório que cruza essas informações.
 
-
 # Docker
+Não está 100%<br>
+<br>
 Instalação <br>
 <code>https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe</code>
-* Não está 100%<br>
-* Material para referência<br>
+<br>
+<br>
+Material para referência<br>
 <code>https://docs.microsoft.com/pt-br/dotnet/core/docker/build-container?tabs=windows</code>
 <br>
 <br>
-* Criar imagem
-Acessar a pasta do projeto pelo cmd ou PowerShell (mesma pasta do arquivo da solução)<br> 
-<code>docker build -t gpro-image -f Api/Dockerfile .</code>
-<br>
-<br>
+Consultar a imagem criada<br>
 <code>docker images</code>
 <br>
 <br>
-* Criar e subir o container
+Criar e subir o container<br>
 <code>docker run -it --rm -p 5000:443 --name gpro-container gpro-image</code>
 
 
