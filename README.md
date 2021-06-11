@@ -130,30 +130,24 @@ um dashboard ou até mesmo um relatório que cruza essas informações.
 ```
 
 # Docker
-* Material para referencia<br>
+Instalação <br>
+<code>https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe</code>
+* Não está 100%<br>
+* Material para referência<br>
 <code>https://docs.microsoft.com/pt-br/dotnet/core/docker/build-container?tabs=windows</code>
 <br>
 <br>
 * Criar imagem
-docker build -t gpro-image -f Api/Dockerfile .
+Acessar a pasta do projeto pelo cmd ou PowerShell (mesma pasta do arquivo da solução)<br> 
+<code>docker build -t gpro-image -f Api/Dockerfile .</code>
+<br>
+<br>
+<code>docker images</code>
+<br>
+<br>
+* Criar e subir o container
+<code>docker run -it --rm -p 5000:443 --name gpro-container gpro-image</code>
 
-docker images
-
-// criar container
-docker create --name gpro-container gpro-image
-
-docker ps -a
-
-// startar
-docker start gpro-container
-
-
-docker run -it --rm -p 5000:80 --name gpro gpro-image
-
-
-
-DISM /Online /Enable-Feature /All /FeatureName:Microsoft-Hyper-V
-```
 
 # Autor 
 
