@@ -119,7 +119,6 @@ Utilizado o Serilog. Está configurado para gravar o log das requisições na pa
 
 
 # Sujestão para melhoria no projeto
-```
 * Retornar as validações em uma listagem de criticas invés de uma exceção para cada validação.
 
 *  Pesquisa de Responsável
@@ -127,7 +126,7 @@ Não colocaria na pesquisa de responsável a responsabilidade de carregar os pro
 Julgo que o cadastro é apenas para cadastrar e não deve-se misturar processos complexos nesse local.
 Para sanar essa necessidade, minha sugestão seria criar uma outra ferramenta para colsulta como 
 um dashboard ou até mesmo um relatório que cruza essas informações.
-```
+
 
 # Docker
 Instalação <br>
