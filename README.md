@@ -5,7 +5,7 @@
 Este projeto refere-se a uma API para gestão de processos judiciais.
 É composto por um cadastro de responsáveis e um cadastro de processos e poderá se consumida de várias formas, 
 via integração, interfaces web, interfaces mobile, etc.<br><br>
-<b>Compostamentos para responsável e processo </b>
+<b>Comportamentos para responsável e processo </b>
 <br>
 * Pesquisar<br>
 * Visualizar<br>
@@ -19,7 +19,7 @@ Arquitetura MVC<br>
 <br>
 <br>
 Banco de dados PostgreSQL versão 12.7<br>
-Intalação não tem segredo. Next, next, finish!<br>
+Instalação não tem segredo. Next, next, finish!<br>
 <code>https://www.enterprisedb.com/postgresql-tutorial-resources-training?cid=48</code>
 <br>
 <br>
@@ -45,7 +45,7 @@ Serilog <br>
 Serilog.AspNetCore<br>
 Versão 4.1.0<br>
 <br>
-Para o LazyLoad - Intalar pode linha de comando pode dentro do VS<br>
+Para o LazyLoad - Instalar pode linha de comando pode dentro do VS<br>
 install-package Microsoft.EntityFrameworkCore.Proxies<br>
 
 # Baixar o projeto
@@ -55,7 +55,7 @@ install-package Microsoft.EntityFrameworkCore.Proxies<br>
 Na ferramenta de banco, configurar uma nova conexão e rodar o script para criação do banco.<br>
 Para esse projeto, criei a estrutura no próprio Database postgres, mas é recomendável criar um database próprio para o projeto. Fica a seu critério.<br>
 A configuração para conexão com o banco fica no "appsettings" na sessão "ConnectionStrings".
-Os scripts estão na pasta SQL do repositorio, mas pode ser baixado por aqui<br>
+Os scripts estão na pasta SQL do repositório, mas pode ser baixado por aqui<br>
 <code>https://github.com/PercioDalPozzo/GPro-GestaoDeProcessos/blob/master/Repositorio/SQL/Script_criacao_banco.sql</code>
 
 
@@ -77,15 +77,15 @@ O retorno da pesquisa estará dentro do "Content" e possui:<br>
 "TotalPaginas" => Quantidade total de páginas considerando os filtros e o limite de registro por pagina<br>
 "TotalRegistros" => Quantidade total de registros considerando os filtros<br>
 "Registros" => a listagem paginada com o resultado da pesquisa<br>
-* PrepararEdicao - Recebe um "Id" e retorna os campos disponiveis para edição ou visualização.
+* PrepararEdicao - Recebe um "Id" e retorna os campos disponíveis para edição ou visualização.
 * Salvar => Recebe uma view e obrigatoriamente precisa ter um "Id".<br>
 Caso este "Id" for 0 (Zero) o backend interpretará como uma inserção de um novo registro.<br>
 Case o "Id" tenha valor, será feita a edição do registro com os dados da view.<br>
-No retorno é exposto o Id caso quem consuma necessite de alguma outra ação com o registro recem inserido.<br>
+No retorno é exposto o Id caso quem consuma necessite de alguma outra ação com o registro recém inserido.<br>
 
 ## Controller de responsável
 * PrepararEdicao => Retorna os dados do responsavel juntamente com a lista dos processos vinculados (limitado em 10 registros)<br>
-* Pesquisar => Campos disponiveis: Nome, Cpf, NumeroProcesso (limitado aos ultimos 4 processos)<br>
+* Pesquisar => Campos disponíveis: Nome, Cpf, NumeroProcesso (limitado aos ultimos 4 processos)<br>
 * Salvar => Nome, Email, Cpf, Foto e AtualizarFoto<br>
 Obs: O campo bool "AtualizarFoto", que deve ser passado como "True" apenas se tiver alteração da foto.
 Isso para evitar trafego desnecessário caso o usuário queira alterar apenas os dados cadastrais.
@@ -94,8 +94,8 @@ Caso não tenha alteração da foto, enviar como "False" e NÃO mandar nada o ca
 ## Controller de processo
 * Para controle de tela sobre permitir ou não edição, será retornada uma propriedade "Finalizada" baseada na situação do processo.
 
-## Envio de email
-Foi criado um email no gmail para fazer o envio. As configurações para envio estão no "appsettings" na sessão "ConfigEnvioEmail".<br>
+## Envio de e-mail
+Foi criado um e-mail no gmail para fazer o envio. As configurações para envio estão no "appsettings" na sessão "ConfigEnvioEmail".<br>
 As configurações são bem fáceis e caso deseje mudar para mandar por outro emitente, precisa lembrar de mudar as configurações da conta
 "Acesso a app menos seguro".
 
@@ -109,7 +109,7 @@ Por dentro do visual studio, acessar no meu "Teste" >> "Executar todos os testes
 
 # Teste de carga
 Não tenho base para saber na pratica qual o volume de informação num ambiente real.<br>
-Então então popudei a base com 100.000 responsáveis e 1.000.000 de processos.<br>
+Então então populei a base com 100.000 responsáveis e 1.000.000 de processos.<br>
 Cada processo foi vinculado a 3 responsáveis.<br>
 O script abaixo zera o banco e popula com a carga de dados citada.<br>
 <code>https://github.com/PercioDalPozzo/GPro-GestaoDeProcessos/blob/master/Repositorio/SQL/Script_teste_carga.sql</code>
@@ -118,13 +118,13 @@ O script abaixo zera o banco e popula com a carga de dados citada.<br>
 Utilizado o Serilog. Está configurado para gravar o log das requisições na pasta "Log" dentro da pasta da aplicação.
 
 
-# Sujestão para melhoria no projeto
-* Retornar as validações em uma listagem de criticas invés de uma exceção para cada validação.
+# Sugestão para melhoria no projeto
+* Retornar as validações em uma listagem de críticas invés de uma exceção para cada validação.
 
 * Pesquisa de Responsável
 Não colocaria na pesquisa de responsável a responsabilidade de carregar os processos. 
 Julgo que o cadastro é apenas para cadastrar e não deve-se misturar processos complexos nesse local.
-Para sanar essa necessidade, minha sugestão seria criar uma outra ferramenta para cosulta como 
+Para sanar essa necessidade, minha sugestão seria criar uma outra ferramenta para consulta como 
 um dashboard ou até mesmo um relatório que cruza essas informações.
 
 # Docker
