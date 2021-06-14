@@ -45,7 +45,7 @@ Serilog <br>
 Serilog.AspNetCore<br>
 Versão 4.1.0<br>
 <br>
-Para o LazyLoad - Instalar pode linha de comando pode dentro do VS<br>
+Para o LazyLoad - Instalar por linha de comando pode dentro do VS<br>
 install-package Microsoft.EntityFrameworkCore.Proxies<br>
 
 # Baixar o projeto
